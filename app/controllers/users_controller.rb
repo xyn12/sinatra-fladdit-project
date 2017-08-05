@@ -34,4 +34,14 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
 
+  get '/profile' do
+    "User profile"
+  end
+
+  get '/logout' do
+    session.clear if logged_in?
+
+    redirect to '/login'
+  end
+
 end

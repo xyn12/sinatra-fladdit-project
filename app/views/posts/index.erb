@@ -1,1 +1,23 @@
-<h1> Success! </h1>
+<h1> Fladdit </h1>
+
+<br>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"> <a href="#"> Posts </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
+</ul>
+<br>
+
+<dir>
+  <% @posts.each do |post| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="lead"> <%= post.title %> </p>
+      </div>
+      <div class="panel-footer">
+        By: <strong class="text-danger"> <%= post.user.username %> </strong>
+        <p class="pull-right text-info"> <%= post.created_at.strftime("%A, %B %d, %Y at: %I:%M%P") %> </p>
+      </div>
+    </div>
+  <% end %>
+</dir>
