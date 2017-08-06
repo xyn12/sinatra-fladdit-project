@@ -1,8 +1,9 @@
-<h1> Fladdit </h1>
+<a href="#"> <h1> Fladdit </h1> </a>
 
 <br>
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"> <a href="#"> Posts </a> </li>
+  <li role="presentation"> <a href="/posts/new"> New Post </a> </li>
   <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
   <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
 </ul>
@@ -12,11 +13,17 @@
   <% @posts.each do |post| %>
     <div class="panel panel-default">
       <div class="panel-body">
-        <p class="lead"> <%= post.title %> </p>
+      <span class="badge"> <strong> <%= post.votes %> </strong> </span> &nbsp; &nbsp;
+        <a class="lead" href="/posts/<%= post.id %>"> <%= post.title %> </a>
+        <br><br>
+          <form class="form-inline" action="/vote/<%= post.id %>" method="POST">
+            <input class="btn btn-success btn-xs" type="submit" name="action" value="Upvote">
+            <input class="btn btn-danger btn-xs" type="submit" name="action" value="Downvote">
+        </form>
       </div>
       <div class="panel-footer">
-        By: <strong class="text-danger"> <%= post.user.username %> </strong>
-        <p class="pull-right text-info"> <%= post.created_at.strftime("%A, %B %d, %Y at: %I:%M%P") %> </p>
+        By: <a class="text-danger" href="/users/<%= post.user.username %>"> <strong> <%= post.user.username %> </strong> </a>
+        <p class="pull-right"> <%= post.created_at.localtime.strftime("%A, %B %d, %Y at: %l:%M%P") %> </p>
       </div>
     </div>
   <% end %>
