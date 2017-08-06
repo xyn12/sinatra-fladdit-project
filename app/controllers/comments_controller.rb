@@ -2,9 +2,13 @@ class CommentsController < ApplicationController
 
   get '/comments/:id/new' do
     redirect to '/login' unless logged_in?
-    @post = Post.find(params[:id])
 
-    erb :'/comments/new_comment'    
+    if @post = Post.find_by(id: params[:id])
+      erb :'/comments/new_comment'
+    else
+      flash[:notice] = "Cannot comment on a post that doesn't exist!"
+      redirect to '/posts'
+    end    
   end
 
   post '/comments/:id/new' do
@@ -21,14 +25,18 @@ class CommentsController < ApplicationController
 
   get '/comments/:id/edit' do
     redirect to '/login' unless logged_in?
-    @comment = Comment.find(params[:id])
 
-    if @comment.user.id != current_user.id
-      flash[:notice] = "You cannot edit another user's comment."
-      redirect to "/posts/#{@comment.post.id}"
-    end
+    if @comment = Comment.find_by(id: params[:id])
+      if @comment.user.id != current_user.id
+        flash[:notice] = "You cannot edit another user's comment."
+        redirect to "/posts/#{@comment.post.id}"
+      end
 
-    erb :'/comments/edit'
+      erb :'/comments/edit'
+    else
+      flash[:notice] = "Comment not found."
+      redirect to '/posts'
+    end  
   end
 
   patch '/comments/:id/edit' do

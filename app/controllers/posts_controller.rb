@@ -39,9 +39,13 @@ class PostsController < ApplicationController
 
   get '/posts/:id' do
     redirect to '/login' unless logged_in?
-    @post = Post.find(params[:id])
 
-    erb :'/posts/show'
+    if @post = Post.find_by(id: params[:id])
+      erb :'/posts/show'
+    else
+      flash[:notice] = "Cannot load a post that doesn't exist."
+      redirect to '/posts'
+    end
   end
   
 end
