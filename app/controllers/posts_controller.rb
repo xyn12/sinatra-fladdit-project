@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   post '/posts/new' do
-    @post = Post.create(title: params[:title], user: current_user)
+    @post = current_user.posts.create(title: params[:title])
 
     if @post.valid?
       redirect to "/posts/#{@post.id}"
