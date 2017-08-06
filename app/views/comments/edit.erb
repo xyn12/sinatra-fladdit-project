@@ -1,0 +1,32 @@
+<% if flash.has?(:notice) %>
+  <div class="alert alert-danger" role="alert"> <%= flash[:notice] %> </div>
+<% end %>
+
+<a href="/posts"> <h1> Fladdit </h1> </a>
+
+<br>
+<ul class="nav nav-tabs">
+  <li role="presentation"> <a href="/posts"> Posts </a> </li>
+  <li role="presentation" class="active"> <a href="#"> Edit Comment </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
+</ul>
+<br>
+
+<form action="/comments/<%= @comment.id %>/edit" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="PATCH">
+  <div class="form-group">
+    <label for="content"> Edit Comment: </label>
+    <textarea rows="3" class="form-control" name="content" id="content"> <%= @comment.content %> </textarea>
+    <br>
+    <input type="submit" class="btn btn-info btn-lg" name="submit" value="Submit">
+    &nbsp;
+    <a href="/posts/<%= @comment.post.id %>" class="btn btn-warning btn-lg" name="cancel" id="cancel"> Cancel </a>
+  </div>
+</form>
+<br>
+
+<form action="/comments/<%= @comment.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-danger" value="Delete Comment">
+</form>

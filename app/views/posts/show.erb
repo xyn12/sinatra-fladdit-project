@@ -1,13 +1,18 @@
+<% if flash.has?(:notice) %>
+  <div class="alert alert-danger" role="alert"> <%= flash[:notice] %> </div>
+<% end %>
+
 <a href="/posts"> <h1> Fladdit </h1> </a>
 
 <br>
 <ul class="nav nav-tabs">
   <li role="presentation"> <a href="/posts"> Posts </a> </li>
   <li role="presentation"> <a href="/posts/new"> New Post </a> </li>
+  <li role="presentation" class="active"> <a href="#"> Comments </a> </li>
   <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
   <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
 </ul>
-<br>
+<br><br>
 
 <div class="panel panel-default">
   <div class="panel-body">
@@ -40,11 +45,10 @@
         <footer>
           <a class="text-danger" href="/users/<%= comment.user.username %>"> <strong> <%= comment.user.username %> </strong> </a>
           &nbsp; &nbsp; <%= comment.created_at.localtime.strftime("%B %d, %Y at: %l:%M%P") %>
+          <br><br> 
+          <a href="/comments/<%= comment.id %>/edit" class="btn btn-warning btn-xs"> Edit Comment </a>
         </footer>
       </blockquote>
-        <form>
-          <input class="btn btn-warning btn-xs" type="submit" name="" value="Edit comment">
-        </form>
       <br>
     <% end %>
   </div>
