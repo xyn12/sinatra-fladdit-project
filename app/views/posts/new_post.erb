@@ -9,7 +9,7 @@
   <li role="presentation"> <a href="/posts"> Posts </a> </li>
   <li role="presentation" class="active"> <a href="#"> New Post </a> </li>
   <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
-  <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/users/<%= current_user.username %>"> <strong> <%= current_user.username %> </strong> </a> </li>
 </ul>
 <br>
 

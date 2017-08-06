@@ -1,3 +1,7 @@
+<% if flash.has?(:notice) %>
+  <div class="alert alert-danger" role="alert"> <%= flash[:notice] %> </div>
+<% end %>
+
 <a href="/posts"> <h1> Fladdit </h1> </a>
 
 <br>
@@ -5,7 +9,7 @@
   <li role="presentation" class="active"> <a href="#"> Posts </a> </li>
   <li role="presentation"> <a href="/posts/new"> New Post </a> </li>
   <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
-  <li role="presentation" class="pull-right"> <a href="/profile"> <strong> <%= current_user.username %> </strong> </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/users/<%= current_user.username %>"> <strong> <%= current_user.username %> </strong> </a> </li>
 </ul>
 <br>
 

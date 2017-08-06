@@ -1,0 +1,41 @@
+<% if flash.has?(:notice) %>
+  <div class="alert alert-danger" role="alert"> <%= flash[:notice] %> </div>
+<% end %>
+
+<a href="/posts"> <h1> Fladdit </h1> </a>
+
+<br>
+<ul class="nav nav-tabs">
+  <li role="presentation"> <a href="/posts"> Home </a> </li>
+  <li role="presentation"> <a href="/users/<%= @user.username %>/posts"> Submitted </a> </li>
+  <li role="presentation" class="active"> <a href="#"> Comments </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/logout"> Logout </a> </li>
+  <li role="presentation" class="pull-right"> <a href="/users/<%= @user.username %>"> <strong> <%= @user.username %> </strong> </a> </li>
+</ul>
+<br><br>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4> <%= @user.username %> </h4>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2"> <img src="/images/blankuser.png" class="img-thumbnail"> </div>
+
+      <div class="col-md-10">
+        <% if @user.comments.empty? %>
+          <h4 class="text-danger"> <%= @user.username %> has never commented... Lots of nothingness! </h4>
+        <% else %>  
+          <ul class="list-group">
+            <% @user.comments.each do |comment| %>
+              <a href="/posts/<%= comment.post.id %>" class="list-group-item list-group-item-success"> <span class="text-danger"> <%= comment.content %> </span>
+              <br> <small> Commented on: <%= comment.created_at.localtime.strftime("%A, %B %d, %Y at: %l:%M%P") %>  </small>
+              </a>
+            <% end %>
+          </ul>
+        <% end %>  
+      </div>
+    </div>
+  </div>
+</div>

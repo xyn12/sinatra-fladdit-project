@@ -12,6 +12,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    redirect to '/posts' if logged_in?
+    
     erb :index
   end
 

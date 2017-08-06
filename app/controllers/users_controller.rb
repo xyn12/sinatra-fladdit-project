@@ -34,8 +34,37 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
 
-  get '/profile' do
-    "User profile"
+  get '/users/:username' do
+    redirect to '/login' unless logged_in?
+
+    if @user = User.find_by(username: params[:username])
+      erb :'/users/profile'
+    else
+      flash[:notice] = "User not found."
+      redirect to '/posts'
+    end
+  end
+
+  get '/users/:username/posts' do
+    redirect to '/login' unless logged_in?
+
+    if @user = User.find_by(username: params[:username])
+      erb :'/users/user_posts'
+    else
+      flash[:notice] = "User not found."
+      redirect to '/posts'
+    end
+  end
+
+  get '/users/:username/comments' do
+    redirect to '/login' unless logged_in?
+
+    if @user = User.find_by(username: params[:username])
+      erb :'/users/user_comments'
+    else
+      flash[:notice] = "User not found."
+      redirect to '/posts'
+    end
   end
 
   get '/logout' do
