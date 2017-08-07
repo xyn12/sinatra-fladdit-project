@@ -11,6 +11,10 @@ class ApplicationController < Sinatra::Base
     use Rack::Flash
   end
 
+  not_found do
+    erb :error_404
+  end
+
   get '/' do
     redirect to '/posts' if logged_in?
     
