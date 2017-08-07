@@ -1,10 +1,10 @@
 # Sinatra Fladdit Project
 
+Fladdit (Flatiron + Reddit) is a Reddit clone on a minor level which allows users to create an account, submit posts and comments. Users can also upvote and downvote a post as well and see the post rise up to the top.
+
 ## Installation
 
-clone this repo.
-
-And then execute the following commands:
+Clone this repo and then execute the following commands:
 
     $ bundle install
     $ rake db:migrate
